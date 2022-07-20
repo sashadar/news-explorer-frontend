@@ -5,13 +5,15 @@ import Navigation from '../Navigation/Navigation';
 
 function Header() {
   return (
-    <header>
+    <header className='header'>
       <Link to='/' className='header__title'>
         NewsExplorer
       </Link>
-      <Navigation></Navigation>
-      <button className='header__button'>Sign In</button>
-      <button className='header__button'></button>
+      <div className='header__container'>
+        <Navigation></Navigation>
+        <button className='header__button'>Sign In</button>
+        {/* <button className='header__button'>button</button> */}
+      </div>
     </header>
   );
 }

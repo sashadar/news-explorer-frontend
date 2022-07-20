@@ -4,9 +4,17 @@ import { Link } from 'react-router-dom';
 function Navigation() {
   return (
     <nav>
-      <ul>
-        <Link to='/'>Home</Link>
-        <Link to='/saved-news'>Saved articles</Link>
+      <ul className='navigation__link-list'>
+        <li className='navigation_link-list-item'>
+          <Link to='/' className='navigation__link'>
+            Home
+          </Link>
+        </li>
+        <li className='navigation_link-list-item'>
+          <Link to='/saved-news' className='navigation__link'>
+            Saved articles
+          </Link>
+        </li>
       </ul>
     </nav>
   );

@@ -1,2 +1,39 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 104px 0;
+  border-bottom: 1px solid rgba(196, 196, 196, 0.01);
+}
+
 .header__title {
+  font-family: 'Roboto Slab', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: #ffffff;
+  text-decoration: none;
+  margin-top: 30px;
+  margin-bottom: 26px;
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+}
+
+.header__button {
+  margin-left: 42px;
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 100px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  width: 176px;
+  height: 48px;
 }

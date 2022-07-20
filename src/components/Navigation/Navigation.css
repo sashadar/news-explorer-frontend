@@ -1,0 +1,22 @@
+.navigation__link-list {
+  padding: 0 0 0;
+  list-style: none;
+}
+
+.navigation_link-list-item {
+  display: inline;
+}
+
+.navigation_link-list-item:nth-child(even) {
+  margin-left: 66px;
+}
+
+.navigation__link {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #ffffff;
+  text-decoration: none;
+}
