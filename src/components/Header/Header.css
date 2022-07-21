@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 104px 0;
-  border-bottom: 1px solid rgba(196, 196, 196, 0.01);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .header__title {
@@ -21,10 +21,11 @@
 .header__container {
   display: flex;
   align-items: center;
+  align-self: stretch;
 }
 
 .header__button {
-  margin-left: 42px;
+  margin-left: 22px;
   background-color: transparent;
   color: #ffffff;
   border: 1px solid #ffffff;
@@ -36,4 +37,6 @@
   line-height: 24px;
   width: 176px;
   height: 48px;
+  box-sizing: border-box;
+  cursor: pointer;
 }
