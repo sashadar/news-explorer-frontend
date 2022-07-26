@@ -10,11 +10,11 @@ function Navigation() {
             Home
           </Link>
         </li>
-        <li className='navigation__link-list-item navigation__link-list-item_articles navigation__link-list-item_active'>
+        {/* <li className='navigation__link-list-item navigation__link-list-item_articles navigation__link-list-item_active'>
           <Link to='/saved-news' className='navigation__link'>
             Saved articles
           </Link>
-        </li>
+        </li> */}
       </ul>
     </nav>
   );

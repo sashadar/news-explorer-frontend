@@ -7,8 +7,11 @@ import About from '../About/About';
 function Main() {
   return (
     <main className='main'>
-      <Header />
-      <SearchForm />
+      <div className='main__background'>
+        <Header />
+        <SearchForm />
+      </div>
+
       <About />
     </main>
   );
