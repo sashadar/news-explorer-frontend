@@ -1,17 +1,7 @@
 .about {
   display: flex;
-  /*  align-items: center; */
   padding: 80px 104px;
 }
-
-/* .about__content-container {
-  display: flex;
-  justify-content: space-between;
-  box-sizing: border-box;
-  margin-top: 80px;
-  margin-bottom: 80px;
-  align-items: start;
-} */
 
 .about__image {
   border-radius: 1000px;

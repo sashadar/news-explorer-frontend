@@ -13,11 +13,11 @@ function Header() {
       </Link>
       <div className='header__container'>
         <Navigation></Navigation>
-        <button className='header__button'>Sign In</button>
-        {/*         <button className='header__button header__button_logout'>
+        {/* <button className='header__button'>Sign In</button> */}
+        <button className='header__button header__button_logout'>
           Elise{' '}
           <img className='header__logout-icon' alt='logout' src={logoutIcon} />
-        </button> */}
+        </button>
       </div>
     </header>
   );

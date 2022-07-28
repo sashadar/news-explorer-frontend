@@ -3,6 +3,7 @@ import React from 'react';
 import Header from '../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import About from '../About/About';
+import NewsCardList from '../NewsCardList/NewsCardList';
 
 function Main() {
   return (
@@ -11,7 +12,7 @@ function Main() {
         <Header />
         <SearchForm />
       </div>
-
+      <NewsCardList />
       <About />
     </main>
   );
