@@ -75,6 +75,7 @@
   border: none;
   width: 168px;
   box-sizing: border-box;
+  cursor: url('../../images/cursors/cursor-pointer-hand.svg'), pointer;
 }
 
 @media screen and (max-width: 1199px) {

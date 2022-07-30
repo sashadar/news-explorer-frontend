@@ -7,7 +7,7 @@
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
-  list-style: none;
+
   box-shadow: 0 8px 12px 3px rgba(8, 29, 45, 0.1);
 }
 
@@ -74,11 +74,14 @@
   text-transform: uppercase;
   color: #b6bcbf;
   margin: 18px 0 0;
-  display: -webkit-box;
+  /*   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-overflow: ellipsis; */
   text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 1199px) {

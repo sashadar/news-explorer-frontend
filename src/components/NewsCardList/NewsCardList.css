@@ -28,6 +28,7 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(224px, 1fr));
   gap: 16px;
+  list-style: none;
 }
 
 @media screen and (max-width: 1199px) {
