@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* height: 34.4vw; */
   padding: 80px 0;
 }
 
@@ -42,8 +41,6 @@
   border-radius: 100px;
   box-sizing: border-box;
   background-color: #ffffff;
-  /*   -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px); */
 }
 
 .search-form__input {

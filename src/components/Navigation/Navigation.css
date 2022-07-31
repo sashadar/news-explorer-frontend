@@ -16,8 +16,6 @@
   color: #ffffff;
   text-decoration: none;
   cursor: url('../../images/cursors/cursor-pointer-hand.svg'), pointer;
-  /*   margin-top: 30px;
-  margin-bottom: 26px; */
 }
 
 .navigation__list {
@@ -36,7 +34,6 @@
   line-height: 24px;
   color: #b6bcbf;
   text-decoration: none;
-  /* cursor: pointer; */
   cursor: url('../../images/cursors/cursor-pointer-hand.svg'), pointer;
   padding: 28px 10px;
   box-sizing: border-box;
@@ -74,12 +71,6 @@
 }
 
 .navigation__username {
-  /*   display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal; */
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -88,7 +79,6 @@
 
 .navigation__button_logout {
   padding: 0 18px;
-  /* max-width: 166px; */
 }
 
 .navigation__logout-icon {
