@@ -7,8 +7,15 @@ import tempCard2Image from '../../images/news-card-lake-image.png';
 import tempCard3Image from '../../images/news-card-elk-image.png';
 import tempCard4Image from '../../images/news-card-sky-image.png';
 
-function NewsCardList() {
-  const tempCardsDataList = [
+function NewsCardList(props) {
+  const [cardsCountToShow, setCardsCountToShow] = React.useState(3);
+
+  const setMoreCardsToShow = () => {
+    setCardsCountToShow(cardsCountToShow + 3);
+    console.log(`CardsCountToShow set to: ${cardsCountToShow}`);
+  };
+
+  const tempCards = [
     {
       image: tempCard1Image,
       category: 'Nature',
@@ -48,13 +55,34 @@ function NewsCardList() {
   ];
   return (
     <section className='news-card-list'>
-      <h2 className='news-card-list__title'>Search results</h2>
+      {!props.isInSavedNews && (
+        <h2 className='news-card-list__title'>Search results</h2>
+      )}
       <ul className='news-card-list__list'>
-        <NewsCard card={tempCardsDataList[0]} />
-        <NewsCard card={tempCardsDataList[1]} />
-        <NewsCard card={tempCardsDataList[2]} />
-        <NewsCard card={tempCardsDataList[3]} />
+        {tempCards &&
+          !props.isInSavedNews &&
+          tempCards
+            .slice(0, cardsCountToShow)
+            .map((currCard, i) => (
+              <NewsCard
+                card={currCard}
+                user='SomeUserName'
+                isInSavedNews={props.isInSavedNews}
+                key={i}
+              ></NewsCard>
+            ))}
       </ul>
+      {tempCards &&
+        !props.isInSavedNews &&
+        cardsCountToShow < tempCards.length && (
+          <button
+            type='button'
+            className='news-card-list__button-more'
+            onClick={setMoreCardsToShow}
+          >
+            Show more
+          </button>
+        )}
     </section>
   );
 }

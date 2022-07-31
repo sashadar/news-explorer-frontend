@@ -12,7 +12,7 @@ function Main() {
         <Header />
         <SearchForm />
       </div>
-      <NewsCardList />
+      <NewsCardList isInSavedNews={false} />
       <About />
     </main>
   );

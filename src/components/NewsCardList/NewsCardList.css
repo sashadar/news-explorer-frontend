@@ -24,11 +24,24 @@
   margin-top: 46px; */
   width: 100%;
   padding: 0;
-  margin-top: 62px;
+  margin: 62px 0;
   display: grid;
   grid-template-columns: repeat(3, minmax(224px, 1fr));
   gap: 16px;
   list-style: none;
+}
+
+.news-card-list__button-more {
+  background-color: #e8e8e8;
+  border-radius: 80px;
+  color: #1a1b22;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  border: none;
+  padding: 20px 99px;
+  cursor: url('../../images/cursors/cursor-pointer-hand.svg'), pointer;
 }
 
 @media screen and (max-width: 1199px) {
