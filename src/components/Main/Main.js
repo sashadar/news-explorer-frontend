@@ -5,14 +5,16 @@ import SearchForm from '../SearchForm/SearchForm';
 import About from '../About/About';
 import NewsCardList from '../NewsCardList/NewsCardList';
 
-function Main() {
+import { tempCards } from '../../utils/constants';
+
+function Main(props) {
   return (
     <main className='main'>
       <div className='main__background'>
-        <Header />
+        <Header signedIn={props.signedIn} page='main' />
         <SearchForm />
       </div>
-      <NewsCardList isInSavedNews={false} />
+      <NewsCardList page='main' cards={tempCards} signedIn={props.signedIn} />
       <About />
     </main>
   );

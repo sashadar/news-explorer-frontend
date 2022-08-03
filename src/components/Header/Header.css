@@ -1,4 +1,36 @@
 .header {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   box-sizing: border-box;
+  padding: 0 104px;
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+  align-items: center;
+  color: #ffffff;
+}
+
+.header_dark {
+  border-color: #d1d2d6;
+}
+
+.header__title {
+  font-family: 'Roboto Slab', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: url('../../images/cursors/cursor-pointer-hand.svg'), pointer;
+}
+
+.header__title_dark {
+  color: #1a1b22;
+}
+
+@media screen and (max-width: 1199px) {
+  .header {
+    padding: 0 5.21%;
+    height: 66px;
+  }
 }

@@ -2,13 +2,22 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Navigation from '../Navigation/Navigation';
-import logoutIcon from '../../images/icons/button-logout-icon.svg';
-import logoutIconDark from '../../images/icons/button-logout-icon-dark.svg';
 
-function Header() {
+function Header(props) {
+  const headerTitleClassName = `header__title ${
+    props.page === 'saved news' ? 'header__title_dark' : ''
+  }`;
+
+  const headerClassName = `header ${
+    props.page === 'saved news' ? 'header_dark' : ''
+  }`;
+
   return (
-    <header className='header'>
-      <Navigation></Navigation>
+    <header className={headerClassName}>
+      <Link to='/' className={headerTitleClassName}>
+        NewsExplorer
+      </Link>
+      <Navigation page={props.page} signedIn={props.signedIn}></Navigation>
     </header>
   );
 }

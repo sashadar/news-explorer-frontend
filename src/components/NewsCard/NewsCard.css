@@ -172,16 +172,6 @@
   overflow: hidden;
 }
 
-@media screen and (max-width: 1199px) {
-  .news-card {
-    /* aspect-ratio: 224/420; */
-  }
-  .news-card__title {
-  }
-  .news-card__paragraph {
-  }
-}
-
 @media screen and (max-width: 1352px) {
   .news-card__category {
     max-width: calc(100% - 3.57% - 3.57% - 42px - 152px);
