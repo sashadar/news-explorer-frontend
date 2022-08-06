@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import Footer from '../Footer/Footer';
+import Login from '../Login/Login';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
@@ -28,6 +29,7 @@ function App() {
         </Switch>
 
         <Footer />
+        <Login isOpen={true}></Login>
       </div>
     </CurrentUserContext.Provider>
   );
