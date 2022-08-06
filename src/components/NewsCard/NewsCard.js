@@ -22,7 +22,10 @@ function NewsCard(props) {
       {props.page === 'saved news' && props.signedIn && (
         <>
           <p className='news-card__category'>{props.card.category}</p>
-          <button className='news-card__button news-card__button_type_delete'>
+          <button
+            className='news-card__button news-card__button_type_delete'
+            type='button'
+          >
             <p className='news-card__tooltip news-card__tooltip_type_delete'>
               Remove from saved
             </p>
@@ -31,7 +34,10 @@ function NewsCard(props) {
       )}
 
       {props.page === 'main' && !props.signedIn && (
-        <button className='news-card__button news-card__button_type_bookmark'>
+        <button
+          className='news-card__button news-card__button_type_bookmark'
+          type='button'
+        >
           <p className='news-card__tooltip news-card__tooltip_type_bookmark'>
             Sign in to save articles
           </p>
@@ -42,6 +48,7 @@ function NewsCard(props) {
         <button
           className='news-card__button news-card__button_type_bookmark-marked'
           onClick={removeCard}
+          type='button'
         ></button>
       )}
 
@@ -49,6 +56,7 @@ function NewsCard(props) {
         <button
           className='news-card__button news-card__button_type_bookmark'
           onClick={saveCard}
+          type='button'
         ></button>
       )}
 

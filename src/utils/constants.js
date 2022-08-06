@@ -69,4 +69,6 @@ const tempCards = [
   },
 ];
 
-export { tempCards };
+const MOBILESCREENWIDTH = 540;
+
+export { tempCards, MOBILESCREENWIDTH };

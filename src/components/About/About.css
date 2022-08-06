@@ -71,3 +71,20 @@
     max-width: 424px;
   }
 }
+
+@media screen and (max-width: 561px) {
+  .about {
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px 128px;
+  }
+
+  .about__image {
+    margin: 0;
+    max-width: 94.4%;
+  }
+  .about__text-container {
+    width: 100%;
+    margin-top: 24px;
+  }
+}

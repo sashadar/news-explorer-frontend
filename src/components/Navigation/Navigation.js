@@ -9,12 +9,18 @@ import logoutIconDark from '../../images/icons/button-logout-icon-dark.svg';
 function Navigation(props) {
   const currentUser = React.useContext(CurrentUserContext);
 
+  const defaultNavigationLinkArticlesClassName =
+    'navigation__link  navigation__link_articles';
+  const defaultNavigationLinkHomeClassName = 'navigation__link';
+  const defaultNavigationButtonLogoutClassName =
+    'navigation__button navigation__button_logout';
+
   const [navigationLinkArticlesClassName, setNavigationLinkArticlesClassName] =
-    React.useState('navigation__link  navigation__link_articles');
+    React.useState(defaultNavigationLinkArticlesClassName);
   const [navigationLinkHomeClassName, setNavigationLinkHomeClassName] =
-    React.useState('navigation__link');
+    React.useState(defaultNavigationLinkHomeClassName);
   const [navigationButtonLogoutClassName, setNavigationButtonLogoutClassName] =
-    React.useState('navigation__button navigation__button_logout');
+    React.useState(defaultNavigationButtonLogoutClassName);
   const [navigationLogoutIconSource, setNavigationLogoutIconSource] =
     React.useState(logoutIcon);
 
@@ -45,16 +51,34 @@ function Navigation(props) {
     setNavigationLogoutIconSource(logoutIconDark);
   };
 
+  const setToDefault = () => {
+    setNavigationLinkArticlesClassName(defaultNavigationLinkArticlesClassName);
+    setNavigationLinkHomeClassName(defaultNavigationLinkHomeClassName);
+    setNavigationButtonLogoutClassName(defaultNavigationButtonLogoutClassName);
+    setNavigationLogoutIconSource(logoutIcon);
+  };
+
   React.useEffect(() => {
-    if (props.page === 'saved news') {
+    if (props.page === 'saved news' && props.isMobileMode) {
+      setToDefault();
+    } else if (props.page === 'saved news' && !props.isMobileMode) {
       setToDark();
     }
-  }, []);
+    console.log(props.isMobileMode);
+  }, [props.isMobileMode]);
 
   return (
-    <nav className='navigation'>
-      <ul className='navigation__list'>
-        <li>
+    <nav
+      className={`navigation ${props.isMenuOpen ? '' : 'navigation_hidden'}`}
+    >
+      <ul
+        className={`navigation__list ${
+          props.isMenuOpen && props.isMobileMode
+            ? ''
+            : 'navigation__list_hidden'
+        }`}
+      >
+        <li className='navigation__list-item'>
           <NavLink
             to='/'
             exact={true}
@@ -66,7 +90,7 @@ function Navigation(props) {
         </li>
         {props.signedIn ? (
           <>
-            <li>
+            <li className='navigation__list-item'>
               <NavLink
                 to='/saved-news'
                 className={navigationLinkArticlesClassName}
@@ -75,7 +99,7 @@ function Navigation(props) {
                 Saved articles
               </NavLink>
             </li>
-            <li>
+            <li className='navigation__list-item navigation__list-item_button'>
               <button className={navigationButtonLogoutClassName}>
                 <span className='navigation__username'>{currentUser.name}</span>
                 <img
@@ -87,7 +111,7 @@ function Navigation(props) {
             </li>
           </>
         ) : (
-          <li>
+          <li className='navigation__list-item navigation__list-item_button'>
             <button className='navigation__button navigation__button_signin'>
               Sign In
             </button>

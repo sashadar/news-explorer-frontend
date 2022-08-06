@@ -8,7 +8,9 @@ import Footer from '../Footer/Footer';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function App() {
-  const [currentUser, setCurrentUser] = React.useState({ name: 'Elise' });
+  const [currentUser, setCurrentUser] = React.useState({
+    name: 'AlexDarincevt',
+  });
   const [signedIn, setSignedIn] = React.useState(true);
   return (
     <CurrentUserContext.Provider value={currentUser}>
