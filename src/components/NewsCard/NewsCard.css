@@ -19,10 +19,8 @@
 }
 
 .news-card__category {
-  /* height: 40px; */
   position: absolute;
   top: 24px;
-  /* left: 24px; */
   left: 6%;
   background-color: #ffffff;
   border-radius: 10px;

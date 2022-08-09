@@ -199,7 +199,6 @@
 
   .navigation_mobile-menu {
     align-items: flex-start;
-    z-index: 2;
     width: 100vw;
 
     position: fixed;
@@ -209,21 +208,9 @@
     height: 100vh;
   }
 
-  .navigation__overlay_expanded {
-    position: fixed;
-    width: 100%;
-    z-index: -1;
-    height: 100vh;
-    /*     top: 0;
-    left: 0; */
-    background-color: rgba(0, 0, 0, 0.5);
-    transition: 0.2s ease;
-  }
-
   .navigation_hidden {
     content-visibility: hidden;
     visibility: hidden;
-    /* display: none; */
     height: 0;
   }
 

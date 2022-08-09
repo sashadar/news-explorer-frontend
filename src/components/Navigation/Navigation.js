@@ -79,11 +79,6 @@ function Navigation({
           : ''
       }`}
     >
-      {/*       <div
-        className={`navigation__overlay ${
-          isMenuOpen ? 'navigation__overlay_expanded' : ''
-        }`}
-      ></div> */}
       <ul
         className={`navigation__list ${
           !isMenuOpen && isMobileMode ? 'navigation__list_hidden' : ''

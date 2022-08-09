@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* padding: 0 7.223% 5.556%; */
   padding: 0 7.223% 80px;
   background-color: #f5f6f7;
   position: relative;
@@ -30,7 +29,6 @@
 }
 
 .news-card-list__button-more {
-  /* background-color: #e8e8e8; */
   background-color: #ffffff;
   border-radius: 80px;
   color: #1a1b22;
@@ -41,7 +39,6 @@
   border: none;
   width: 288px;
   height: 54px;
-  /* padding: 20px 99px; */
   margin-top: 2px;
   cursor: url('../../images/cursors/cursor-pointer-hand.svg'), pointer;
   transition: 0.3s ease-in-out;

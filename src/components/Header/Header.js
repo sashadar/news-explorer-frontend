@@ -27,11 +27,6 @@ function Header({
         page === 'saved news' && !isMenuOpen ? 'header_dark' : ''
       } ${isMenuOpen ? 'header_mobile-expanded' : ''}`}
     >
-      {/*       <div
-        className={`navigation__overlay ${
-          isMenuOpen ? 'navigation__overlay_expanded' : ''
-        }`}
-      ></div> */}
       {!isBlankHeader && (
         <div className='header__container'>
           <Link
