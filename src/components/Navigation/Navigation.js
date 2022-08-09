@@ -1,12 +1,21 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 import logoutIcon from '../../images/icons/button-logout-icon.svg';
 import logoutIconDark from '../../images/icons/button-logout-icon-dark.svg';
 
-function Navigation(props) {
+function Navigation({
+  page,
+  section,
+  signedIn,
+  isMobileMode,
+  isMenuOpen = false,
+  setIsMenuOpen,
+  openSignInPopup,
+  handleLogoutClick,
+}) {
   const currentUser = React.useContext(CurrentUserContext);
 
   const defaultNavigationLinkArticlesClassName =
@@ -23,20 +32,6 @@ function Navigation(props) {
     React.useState(defaultNavigationButtonLogoutClassName);
   const [navigationLogoutIconSource, setNavigationLogoutIconSource] =
     React.useState(logoutIcon);
-
-  /*   const navigationLinkArticlesClassName = `navigation__link  navigation__link_articles ${
-    props.page === 'saved news' ? 'navigation__link_dark' : ''
-  }`;
-  const navigationLinkHomeClassName = `navigation__link ${
-    props.page === 'saved news' ? 'navigation__link_dark' : ''
-  }`;
-
-  const navigationButtonLogoutClassName = `navigation__button navigation__button_logout ${
-    props.page === 'saved news' ? 'navigation__button_dark' : ''
-  }`;
-
-  const navigationLogoutIconSource =
-    props.page === 'saved news' ? logoutIconDark : logoutIcon; */
 
   const setToDark = () => {
     setNavigationLinkArticlesClassName(
@@ -59,40 +54,66 @@ function Navigation(props) {
   };
 
   React.useEffect(() => {
-    if (props.page === 'saved news' && props.isMobileMode) {
+    if (page === 'saved news' && isMobileMode) {
       setToDefault();
-    } else if (props.page === 'saved news' && !props.isMobileMode) {
+    } else if (
+      (page === 'saved news' && !isMobileMode) ||
+      section === 'footer'
+    ) {
       setToDark();
     }
-    console.log(props.isMobileMode);
-  }, [props.isMobileMode]);
+    console.log(isMobileMode);
+  }, [isMobileMode]);
+
+  const handleLinkClick = () => {
+    setIsMenuOpen(false);
+  };
 
   return (
     <nav
-      className={`navigation ${props.isMenuOpen ? '' : 'navigation_hidden'}`}
+      className={`navigation ${
+        isMobileMode && section === 'header' ? 'navigation_mobile-menu' : ''
+      } ${
+        !isMenuOpen && isMobileMode && section === 'header'
+          ? 'navigation_hidden'
+          : ''
+      }`}
     >
+      {/*       <div
+        className={`navigation__overlay ${
+          isMenuOpen ? 'navigation__overlay_expanded' : ''
+        }`}
+      ></div> */}
       <ul
         className={`navigation__list ${
-          props.isMenuOpen && props.isMobileMode
-            ? ''
-            : 'navigation__list_hidden'
-        }`}
+          !isMenuOpen && isMobileMode ? 'navigation__list_hidden' : ''
+        } ${isMenuOpen && isMobileMode ? 'navigation__list_menu-opened' : ''}`}
       >
-        <li className='navigation__list-item'>
+        <li
+          className={`navigation__list-item ${
+            section === 'footer' ? 'navigation__list-item_footer' : ''
+          }`}
+        >
           <NavLink
             to='/'
+            onClick={handleLinkClick}
             exact={true}
-            className={navigationLinkHomeClassName}
-            activeClassName='navigation__link_active'
+            className={`${navigationLinkHomeClassName} ${
+              section === 'footer' ? 'navigation__link_footer' : ''
+            }`}
+            activeClassName={`navigation__link_active ${
+              section === 'footer' ? 'navigation__link_no-border' : ''
+            }`}
           >
             Home
           </NavLink>
         </li>
-        {props.signedIn ? (
+        {signedIn && section === 'header' && (
           <>
             <li className='navigation__list-item'>
               <NavLink
                 to='/saved-news'
+                onClick={handleLinkClick}
                 className={navigationLinkArticlesClassName}
                 activeClassName='navigation__link_active'
               >
@@ -100,7 +121,10 @@ function Navigation(props) {
               </NavLink>
             </li>
             <li className='navigation__list-item navigation__list-item_button'>
-              <button className={navigationButtonLogoutClassName}>
+              <button
+                className={navigationButtonLogoutClassName}
+                onClick={handleLogoutClick}
+              >
                 <span className='navigation__username'>{currentUser.name}</span>
                 <img
                   className='navigation__logout-icon'
@@ -110,14 +134,47 @@ function Navigation(props) {
               </button>
             </li>
           </>
-        ) : (
+        )}
+        {!signedIn && section === 'header' && (
           <li className='navigation__list-item navigation__list-item_button'>
-            <button className='navigation__button navigation__button_signin'>
+            <button
+              className='navigation__button navigation__button_signin'
+              onClick={openSignInPopup}
+            >
               Sign In
             </button>
           </li>
         )}
+        {section === 'footer' && (
+          <li className='navigation__list-item navigation__list-item_footer'>
+            <a
+              className='navigation__link navigation__link_dark navigation__link_footer'
+              href='https://practicum.com/'
+              target='_blank'
+            >
+              Practicum by Yandex
+            </a>
+          </li>
+        )}
       </ul>
+      {section === 'footer' && (
+        <ul className='navigation__list navigation__list_icons '>
+          <li className='navigation__list-item'>
+            <a
+              className='navigation__icon-link navigation__icon-link_github'
+              href='https://github.com/Yandex-Practicum'
+              target='_blank'
+            ></a>
+          </li>
+          <li className='navigation__list-item'>
+            <a
+              className='navigation__icon-link navigation__icon-link_facebook'
+              href='https://www.facebook.com/Practicum100IL/'
+              target='_blank'
+            ></a>
+          </li>
+        </ul>
+      )}
     </nav>
   );
 }

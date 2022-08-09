@@ -1,8 +1,10 @@
 import React from 'react';
 
-function SearchForm() {
+function SearchForm({ isMenuOpen }) {
   return (
-    <section className='search-form'>
+    <section
+      className={`search-form ${isMenuOpen ? 'search-form_shifted-down' : ''}`}
+    >
       <div className='search-form__container'>
         <h2 className='search-form__title'>What's going on in the world?</h2>
         <p className='search-form__subtitle'>

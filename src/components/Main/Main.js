@@ -7,14 +7,31 @@ import NewsCardList from '../NewsCardList/NewsCardList';
 
 import { tempCards } from '../../utils/constants';
 
-function Main(props) {
+function Main({
+  signedIn,
+  openSignInPopup,
+  isMenuOpen,
+  setIsMenuOpen,
+  isMobileMode,
+  isBlankHeader,
+  handleLogoutClick,
+}) {
   return (
     <main className='main'>
       <div className='main__background'>
-        <Header signedIn={props.signedIn} page='main' />
-        <SearchForm />
+        <Header
+          signedIn={signedIn}
+          page='main'
+          openSignInPopup={openSignInPopup}
+          isMenuOpen={isMenuOpen}
+          setIsMenuOpen={setIsMenuOpen}
+          isMobileMode={isMobileMode}
+          isBlankHeader={isBlankHeader}
+          handleLogoutClick={handleLogoutClick}
+        />
+        <SearchForm isMenuOpen={isMenuOpen} />
       </div>
-      <NewsCardList page='main' cards={tempCards} signedIn={props.signedIn} />
+      <NewsCardList page='main' cards={tempCards} signedIn={signedIn} />
       <About />
     </main>
   );

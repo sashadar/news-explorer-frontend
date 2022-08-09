@@ -1,8 +1,14 @@
 .search-form {
+  /* width: 100%; */
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 80px 0;
+  /* position: relative; */
+}
+
+.search-form_shifted-down {
+  margin-top: 56px;
 }
 
 .search-form__container {
@@ -73,6 +79,11 @@
   width: 168px;
   box-sizing: border-box;
   cursor: url('../../images/cursors/cursor-pointer-hand.svg'), pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.search-form__button:hover {
+  background-color: #2a65cc;
 }
 
 @media screen and (max-width: 1199px) {

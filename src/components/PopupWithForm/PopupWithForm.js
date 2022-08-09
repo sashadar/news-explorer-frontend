@@ -1,6 +1,20 @@
 import React from 'react';
 
-function PopupWithForm({ isOpen, name, onClose, children }) {
+function PopupWithForm({ isOpen, onClose, children }) {
+  React.useEffect(() => {
+    if (!isOpen) return;
+
+    const closeByEscape = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    document.addEventListener('keydown', closeByEscape);
+
+    return () => document.removeEventListener('keydown', closeByEscape);
+  }, [isOpen, onClose]);
+
   const handleOverlay = (e) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -9,13 +23,13 @@ function PopupWithForm({ isOpen, name, onClose, children }) {
 
   return (
     <div
-      className={`popup  ${props.isOpen ? 'popup_opened' : ''} `}
+      className={`popup  ${isOpen ? 'popup_opened' : ''} `}
       onClick={handleOverlay}
     >
       <div className={`popup__container`}>
         <button
           type='button'
-          className='popup__close'
+          className='popup__button-close'
           aria-label='close'
           onClick={onClose}
         ></button>

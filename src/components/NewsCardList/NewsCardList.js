@@ -2,7 +2,7 @@ import React from 'react';
 
 import NewsCard from '../NewsCard/NewsCard';
 
-function NewsCardList(props) {
+function NewsCardList({ page, signedIn, cards }) {
   const [cardsCountToShow, setCardsCountToShow] = React.useState(3);
 
   const setMoreCardsToShow = () => {
@@ -10,32 +10,32 @@ function NewsCardList(props) {
   };
 
   React.useEffect(() => {
-    if (props.page === 'saved news') {
+    if (page === 'saved news') {
       setMoreCardsToShow();
     }
   }, []);
 
   return (
     <section className='news-card-list'>
-      {!props.isInSavedNews && (
+      {page === 'main' && (
         <h2 className='news-card-list__title'>Search results</h2>
       )}
 
       <ul className='news-card-list__list'>
-        {props.cards &&
-          props.cards
+        {cards &&
+          cards
             .slice(0, cardsCountToShow)
             .map((currCard, i) => (
               <NewsCard
                 card={currCard}
-                signedIn={props.signedIn}
-                page={props.page}
+                signedIn={signedIn}
+                page={page}
                 key={i}
               ></NewsCard>
             ))}
       </ul>
 
-      {props.cards && cardsCountToShow < props.cards.length && (
+      {cards && cardsCountToShow < cards.length && (
         <button
           type='button'
           className='news-card-list__button-more'
