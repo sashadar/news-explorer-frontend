@@ -57,7 +57,7 @@
     color: #ffffff;
     flex-direction: column;
     width: 100%;
-    z-index: 3;
+    z-index: 1;
   }
 
   .header_mobile-expanded {
@@ -71,7 +71,7 @@
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    z-index: 4;
+    z-index: 1;
   }
 
   .header__button {
