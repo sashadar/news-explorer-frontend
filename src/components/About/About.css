@@ -14,11 +14,7 @@
 .about__text-container {
   max-width: 600px;
   margin-top: 51px;
-
-  /*   margin-left: 56px; */
   color: #1a1b22;
-
-  /* box-sizing: border-box; */
 }
 
 .about__title {
@@ -41,7 +37,6 @@
 
 @media screen and (max-width: 1199px) {
   .about {
-    /* padding: 7.813% 5.21%; */
     padding: 5.21%;
   }
   .about__image {
