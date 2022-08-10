@@ -96,14 +96,18 @@ function App() {
     history.push('/');
   };
 
-  const handleLoginSubmit = (e) => {
+  const handleSignInSubmit = (e) => {
     e.preventDefault();
+
     /*   to be continued... */
+    setIsSignInPopupOpen(false);
   };
 
   const handleSignUpSubmit = (e) => {
     e.preventDefault();
     /* to be continued...*/
+    setIsSignUpPopupOpen(false);
+    setIsSignupSuccessPopupOpen(true);
   };
 
   return (
@@ -138,7 +142,7 @@ function App() {
         <SignIn
           isOpen={isSignInPopupOpen}
           onClose={closeAllPopups}
-          handleLoginSubmit={handleLoginSubmit}
+          handleSignInSubmit={handleSignInSubmit}
           email={email}
           setEmail={setEmail}
           password={password}
