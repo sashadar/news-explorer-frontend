@@ -14,7 +14,7 @@ function SignIn({
   isFormValid,
 }) {
   return (
-    <PopupWithForm isOpen={isOpen} onClose={onClose}>
+    <PopupWithForm isOpen={isOpen} onClose={onClose} isAuth={true}>
       <form className='popup__form' name='login' onSubmit={handleSignInSubmit}>
         <h2 className='popup__title'>Sign in</h2>
         <label className='popup__label' htmlFor='email-input'>

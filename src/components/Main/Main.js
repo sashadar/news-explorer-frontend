@@ -19,7 +19,7 @@ function Main({
   handleLogoutClick,
 }) {
   const [isPreloaderActive, setIsPreloaderActive] = React.useState(false);
-  const [isNothingFound, setIsNothingFound] = React.useState(true);
+  const [isNothingFound, setIsNothingFound] = React.useState(false);
 
   return (
     <main className='main'>
