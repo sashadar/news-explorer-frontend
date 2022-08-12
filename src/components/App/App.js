@@ -8,6 +8,8 @@ import SignIn from '../SignIn/SignIn';
 import SignUp from '../SignUp/SignUp';
 import SignUpSuccess from '../SignUpSuccess/SignUpSuccess';
 
+import newsApi from '../../utils/NewsApi';
+
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 import { MOBILESCREENWIDTH } from '../../utils/constants';
@@ -24,7 +26,7 @@ function App() {
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = React.useState(false);
   const [isSignupSuccessPopupOpen, setIsSignupSuccessPopupOpen] =
     React.useState(false);
-  const [isFormValid, setIsFormValid] = React.useState(false);
+  const [isFormValid, setIsFormValid] = React.useState(true);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMode, setIsMobileMode] = React.useState(false);
   const [isBlankHeader, setIsBlankHeader] = React.useState(false);
@@ -98,6 +100,11 @@ function App() {
 
   const handleSignInSubmit = (e) => {
     e.preventDefault();
+
+    /* console.log(newsApi.getArticles('Tesla').totalResults); */
+    newsApi.getArticles('tesla').then(({ articles }) => {
+      console.log(JSON.stringify(articles[0]));
+    });
 
     /*   to be continued... */
     setIsSignInPopupOpen(false);
