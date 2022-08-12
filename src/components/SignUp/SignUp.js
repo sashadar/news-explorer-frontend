@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
@@ -17,7 +16,7 @@ function SignUp({
   isFormValid,
 }) {
   return (
-    <PopupWithForm isOpen={isOpen} onClose={onClose}>
+    <PopupWithForm isOpen={isOpen} onClose={onClose} isAuth={true}>
       <form
         className='popup__form'
         name='register'

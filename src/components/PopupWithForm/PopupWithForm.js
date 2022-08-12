@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PopupWithForm({ isOpen, onClose, children }) {
+function PopupWithForm({ isOpen, onClose, children, isAuth }) {
   React.useEffect(() => {
     if (!isOpen) return;
 
@@ -26,7 +26,11 @@ function PopupWithForm({ isOpen, onClose, children }) {
       className={`popup  ${isOpen ? 'popup_opened' : ''} `}
       onClick={handleOverlay}
     >
-      <div className={`popup__container`}>
+      <div
+        className={`popup__container ${
+          isAuth ? '' : 'popup__container_padding-extended'
+        }`}
+      >
         <button
           type='button'
           className='popup__button-close'

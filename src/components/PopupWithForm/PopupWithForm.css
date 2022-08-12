@@ -21,6 +21,12 @@
 }
 
 .popup__container {
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  width: 430px;
+  box-sizing: border-box;
   margin: auto;
   position: relative;
   color: #000000;
@@ -30,6 +36,10 @@
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   background-color: #ffffff;
   padding: 32px 36px 26px;
+}
+
+.popup__container_padding-extended {
+  padding: 43px 36px 51px;
 }
 
 .popup__button-close {
@@ -52,35 +62,31 @@
 }
 
 .popup__form {
-  font-family: 'Roboto', 'Arial', sans-serif;
-  font-weight: 400;
   display: flex;
   flex-direction: column;
 }
 
 .popup__title {
+  font-family: 'Roboto', 'Arial', sans-serif;
   font-weight: 900;
   font-size: 24px;
   line-height: 28px;
   width: 358px;
-  margin: 0 0 8px;
+  margin: 0 0 14px;
   align-self: flex-start;
 }
 
 .popup__label {
-  margin-top: 12px;
-  font-family: 'Inter', 'Arial', sans-serif;
+  margin-top: 8px;
   font-size: 12px;
   line-height: 15px;
   color: #2f71e5;
 }
 
 .popup__input {
-  font-size: 14px;
-  line-height: 17px;
   border: none;
   margin-top: 9px;
-  padding: 0 0 10px;
+  padding: 0 0 9px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
@@ -90,7 +96,7 @@
 }
 
 .popup__error {
-  margin-top: 2px;
+  margin: 2px 0 4px;
   font-family: 'Inter', 'Arial', sans-serif;
   font-size: 12px;
   line-height: 15px;
@@ -104,7 +110,8 @@
 }
 
 .popup__button-submit {
-  margin-top: 8px;
+  padding: 0;
+  margin: 8px 0 16px;
   font-family: 'Roboto', 'Arial', sans-serif;
   font-weight: 500;
   font-size: 18px;
@@ -129,7 +136,7 @@
 }
 
 .popup__alternative {
-  margin-top: 15px;
+  margin: 0;
   font-family: 'Inter', 'Arial', sans-serif;
   font-size: 14px;
   line-height: 17px;
@@ -137,18 +144,13 @@
 }
 
 .popup__link {
+  align-self: flex-start;
+  margin: 0;
   color: #2f71e5;
   cursor: url('../../images/cursors/cursor-pointer-hand.svg'), pointer;
 }
 
 @media screen and (max-width: 540px) {
-  /*   .popup__button-close {
-    width: 13.4px;
-    height: 13.4px;
-    top: -34.7px;
-    right: 21.3px;
-  } */
-
   .popup__container {
     padding: 16px 16px 20px;
   }
@@ -168,6 +170,7 @@
     top: -34.7px;
     right: 21.3px;
   }
+
   .popup__container {
     width: 100%;
     margin-top: 56px;
@@ -180,7 +183,6 @@
 
   .popup__error {
     margin-top: 1px;
-    font-family: 'Inter', 'Arial', sans-serif;
     font-size: 8px;
     line-height: 10px;
     height: 10px;

@@ -20,7 +20,7 @@
 
 .search-form__title {
   margin: 0;
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab', 'Arial', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 60px;
@@ -31,7 +31,7 @@
 .search-form__subtitle {
   margin-top: 32px;
   margin-bottom: 0;
-  font-family: 'Roboto';
+  font-family: 'Roboto', 'Arial', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -50,7 +50,7 @@
 }
 
 .search-form__input {
-  font-family: 'Roboto';
+  font-family: 'Roboto', 'Arial', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -68,7 +68,7 @@
   background-color: #2f71e5;
   box-shadow: 0 5px 15px rgba(14, 26, 57, 0.2);
   border-radius: 100px;
-  font-family: 'Roboto';
+  font-family: 'Roboto', 'Arial', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -83,6 +83,10 @@
 }
 
 .search-form__button:hover {
+  background-color: #347eff;
+}
+
+.search-form__button:active {
   background-color: #2a65cc;
 }
 

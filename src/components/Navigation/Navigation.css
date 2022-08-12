@@ -69,7 +69,7 @@
   color: #ffffff;
   border: 1px solid #ffffff;
   border-radius: 100px;
-  font-family: 'Roboto';
+  font-family: 'Roboto', 'Arial', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -116,11 +116,11 @@
   margin-left: 28px;
 }
 
-.navigation__icon-link_github {
+.navigation__icon-link_icon_github {
   background-image: url('../../images/icons/github-icon.svg');
 }
 
-.navigation__icon-link_facebook {
+.navigation__icon-link_icon_facebook {
   background-image: url('../../images/icons/facebook-icon.svg');
 }
 
@@ -221,7 +221,7 @@
     flex-grow: 2;
   }
 
-  .navigation__list_icons {
+  .navigation__list_content_icons {
     flex-direction: row;
     flex-shrink: 2;
   }

@@ -6,6 +6,7 @@ import SavedNews from '../SavedNews/SavedNews';
 import Footer from '../Footer/Footer';
 import SignIn from '../SignIn/SignIn';
 import SignUp from '../SignUp/SignUp';
+import SignUpSuccess from '../SignUpSuccess/SignUpSuccess';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
@@ -21,6 +22,8 @@ function App() {
   const [userName, setUserName] = React.useState('');
   const [isSignInPopupOpen, setIsSignInPopupOpen] = React.useState(false);
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = React.useState(false);
+  const [isSignupSuccessPopupOpen, setIsSignupSuccessPopupOpen] =
+    React.useState(false);
   const [isFormValid, setIsFormValid] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMode, setIsMobileMode] = React.useState(false);
@@ -64,6 +67,7 @@ function App() {
   const closeAllPopups = () => {
     setIsSignInPopupOpen(false);
     setIsSignUpPopupOpen(false);
+    setIsSignupSuccessPopupOpen(false);
   };
 
   function resetForm() {
@@ -92,14 +96,18 @@ function App() {
     history.push('/');
   };
 
-  const handleLoginSubmit = (e) => {
+  const handleSignInSubmit = (e) => {
     e.preventDefault();
+
     /*   to be continued... */
+    setIsSignInPopupOpen(false);
   };
 
   const handleSignUpSubmit = (e) => {
     e.preventDefault();
     /* to be continued...*/
+    setIsSignUpPopupOpen(false);
+    setIsSignupSuccessPopupOpen(true);
   };
 
   return (
@@ -134,7 +142,7 @@ function App() {
         <SignIn
           isOpen={isSignInPopupOpen}
           onClose={closeAllPopups}
-          handleLoginSubmit={handleLoginSubmit}
+          handleSignInSubmit={handleSignInSubmit}
           email={email}
           setEmail={setEmail}
           password={password}
@@ -155,6 +163,11 @@ function App() {
           handleSignInCLick={openSignInPopup}
           isFormValid={isFormValid}
         ></SignUp>
+        <SignUpSuccess
+          isOpen={isSignupSuccessPopupOpen}
+          onClose={closeAllPopups}
+          handleSignInCLick={openSignInPopup}
+        ></SignUpSuccess>
       </div>
     </CurrentUserContext.Provider>
   );

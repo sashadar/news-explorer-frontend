@@ -153,17 +153,17 @@ function Navigation({
         )}
       </ul>
       {section === 'footer' && (
-        <ul className='navigation__list navigation__list_icons '>
+        <ul className='navigation__list navigation__list_content_icons '>
           <li className='navigation__list-item'>
             <a
-              className='navigation__icon-link navigation__icon-link_github'
+              className='navigation__icon-link navigation__icon-link_icon_github'
               href='https://github.com/Yandex-Practicum'
               target='_blank'
             ></a>
           </li>
           <li className='navigation__list-item'>
             <a
-              className='navigation__icon-link navigation__icon-link_facebook'
+              className='navigation__icon-link navigation__icon-link_icon_facebook'
               href='https://www.facebook.com/Practicum100IL/'
               target='_blank'
             ></a>
