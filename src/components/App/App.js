@@ -22,10 +22,15 @@ function App() {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [userName, setUserName] = React.useState('');
+  const [articles, setArticles] = React.useState([]);
+  const [keyword, setKeyword] = React.useState('');
   const [isSignInPopupOpen, setIsSignInPopupOpen] = React.useState(false);
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = React.useState(false);
   const [isSignupSuccessPopupOpen, setIsSignupSuccessPopupOpen] =
     React.useState(false);
+  const [isPreloaderActive, setIsPreloaderActive] = React.useState(false);
+  const [isNothingFound, setIsNothingFound] = React.useState(false);
+  const [isSearchError, setIsSearchError] = React.useState(false);
   const [isFormValid, setIsFormValid] = React.useState(true);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMode, setIsMobileMode] = React.useState(false);
@@ -98,15 +103,36 @@ function App() {
     history.push('/');
   };
 
-  const handleSignInSubmit = (e) => {
-    e.preventDefault();
+  const handleSearchArticles = (keyword) => {
+    setIsPreloaderActive(true);
+    setKeyword(keyword);
 
     /* console.log(newsApi.getArticles('Tesla').totalResults); */
-    newsApi.getArticles('tesla').then(({ articles }) => {
+    /*     newsApi.getArticles(keyword).then(({ articles }) => {
       console.log(JSON.stringify(articles[0]));
-    });
+    }); */
+    newsApi
+      .getArticles(keyword)
+      .then((data) => {
+        setIsNothingFound(data.articles.length === 0);
+        setArticles(data.articles);
+        localStorage.setItem('articles', JSON.stringify(data.articles));
+        localStorage.setItem('keyword', keyword);
+      })
+      .catch(() => {
+        setIsSearchError(true);
+        setArticles([]);
+        localStorage.removeItem('articles');
+        localStorage.removeItem('keyword');
+      })
+      .finally(() => {
+        setIsPreloaderActive(false);
+      });
+  };
 
-    /*   to be continued... */
+  const handleSignInSubmit = (e) => {
+    e.preventDefault();
+    /* to be continued...*/
     setIsSignInPopupOpen(false);
   };
 
@@ -123,13 +149,19 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <Main
+              articles={articles}
+              keyword={keyword}
               signedIn={signedIn}
               openSignInPopup={openSignInPopup}
               isMenuOpen={isMenuOpen}
               setIsMenuOpen={setIsMenuOpen}
               isMobileMode={isMobileMode}
               isBlankHeader={isBlankHeader}
+              isPreloaderActive={isPreloaderActive}
+              isNothingFound={isNothingFound}
+              isSearchError={isSearchError}
               handleLogoutClick={handleLogout}
+              handleSearchArticles={handleSearchArticles}
             />
           </Route>
           <Route exact path='/saved-news'>

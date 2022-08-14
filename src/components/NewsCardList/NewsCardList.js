@@ -2,7 +2,7 @@ import React from 'react';
 
 import NewsCard from '../NewsCard/NewsCard';
 
-function NewsCardList({ page, signedIn, cards }) {
+function NewsCardList({ page, signedIn, articles, keyword }) {
   const [cardsCountToShow, setCardsCountToShow] = React.useState(3);
 
   const setMoreCardsToShow = () => {
@@ -22,12 +22,13 @@ function NewsCardList({ page, signedIn, cards }) {
       )}
 
       <ul className='news-card-list__list'>
-        {cards &&
-          cards
+        {articles &&
+          articles
             .slice(0, cardsCountToShow)
-            .map((currCard, i) => (
+            .map((currentArticle, i) => (
               <NewsCard
-                card={currCard}
+                card={currentArticle}
+                keyword={keyword}
                 signedIn={signedIn}
                 page={page}
                 key={i}
@@ -35,7 +36,7 @@ function NewsCardList({ page, signedIn, cards }) {
             ))}
       </ul>
 
-      {cards && cardsCountToShow < cards.length && (
+      {articles && cardsCountToShow < articles.length && (
         <button
           type='button'
           className='news-card-list__button-more'

@@ -10,17 +10,20 @@ import NewsCardList from '../NewsCardList/NewsCardList';
 import { tempCards } from '../../utils/constants';
 
 function Main({
+  articles,
+  keyword,
   signedIn,
   openSignInPopup,
   isMenuOpen,
   setIsMenuOpen,
   isMobileMode,
   isBlankHeader,
+  isPreloaderActive,
+  isNothingFound,
+  isSearchError,
   handleLogoutClick,
+  handleSearchArticles,
 }) {
-  const [isPreloaderActive, setIsPreloaderActive] = React.useState(false);
-  const [isNothingFound, setIsNothingFound] = React.useState(false);
-
   return (
     <main className='main'>
       <div className='main__background'>
@@ -34,12 +37,24 @@ function Main({
           isBlankHeader={isBlankHeader}
           handleLogoutClick={handleLogoutClick}
         />
-        <SearchForm isMenuOpen={isMenuOpen} />
+        <SearchForm
+          isMenuOpen={isMenuOpen}
+          handleSearchArticles={handleSearchArticles}
+        />
       </div>
       {isPreloaderActive && <Preloader></Preloader>}
-      {isNothingFound && <NothingFound></NothingFound>}
+      {(isNothingFound || isSearchError) && (
+        <NothingFound isSearchError={isSearchError}></NothingFound>
+      )}
 
-      <NewsCardList page='main' cards={tempCards} signedIn={signedIn} />
+      {articles.length > 0 && (
+        <NewsCardList
+          page='main'
+          articles={articles}
+          keyword={keyword}
+          signedIn={signedIn}
+        />
+      )}
       <About />
     </main>
   );

@@ -3,7 +3,7 @@ import tempCard2Image from '../images/news-card-lake-image.png';
 import tempCard3Image from '../images/news-card-elk-image.png';
 import tempCard4Image from '../images/news-card-sky-image.png';
 
-const tempCards = [
+export const tempCards = [
   {
     image: tempCard1Image,
     category: 'Nature',
@@ -69,6 +69,15 @@ const tempCards = [
   },
 ];
 
-const MOBILESCREENWIDTH = 540;
+export const MOBILESCREENWIDTH = 540;
 
-export { tempCards, MOBILESCREENWIDTH };
+export const SEARCH_ERROR_MESSAGE = {
+  title: 'Search Error',
+  message:
+    'Sorry, something went wrong during the request. There may be a connection issue or the server may be down. Please try again later.',
+};
+
+export const NOTHING_FOUND_MESSAGE = {
+  title: 'Nothing Found',
+  message: 'Sorry, but nothing matched your search terms.',
+};

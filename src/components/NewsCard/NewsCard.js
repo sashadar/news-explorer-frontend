@@ -1,6 +1,9 @@
 import React from 'react';
+import Moment from 'moment';
 
-function NewsCard(props) {
+import noImage from '../../images/icons/no-image-icon.jpg';
+
+function NewsCard({ card, keyword, signedIn, page, key }) {
   const [isSaved, setIsSaved] = React.useState(false);
 
   const saveCard = () => {
@@ -15,13 +18,13 @@ function NewsCard(props) {
     <li className='news-card'>
       <img
         className='news-card__image'
-        src={props.card.image}
-        alt={props.card.title}
+        src={card.urlToImage ? card.urlToImage : noImage}
+        alt={card.urlToImage ? card.title : 'no image available'}
       ></img>
 
-      {props.page === 'saved news' && props.signedIn && (
+      {page === 'saved news' && signedIn && (
         <>
-          <p className='news-card__category'>{props.card.category}</p>
+          <p className='news-card__category'>{keyword}</p>
           <button
             className='news-card__button news-card__button_type_delete'
             type='button'
@@ -33,7 +36,7 @@ function NewsCard(props) {
         </>
       )}
 
-      {props.page === 'main' && !props.signedIn && (
+      {page === 'main' && !signedIn && (
         <button
           className='news-card__button news-card__button_type_bookmark'
           type='button'
@@ -44,7 +47,7 @@ function NewsCard(props) {
         </button>
       )}
 
-      {props.page === 'main' && props.signedIn && isSaved && (
+      {page === 'main' && signedIn && isSaved && (
         <button
           className='news-card__button news-card__button_type_bookmark-marked'
           onClick={removeCard}
@@ -52,7 +55,7 @@ function NewsCard(props) {
         ></button>
       )}
 
-      {props.page === 'main' && props.signedIn && !isSaved && (
+      {page === 'main' && signedIn && !isSaved && (
         <button
           className='news-card__button news-card__button_type_bookmark'
           onClick={saveCard}
@@ -60,11 +63,13 @@ function NewsCard(props) {
         ></button>
       )}
 
-      <a className='news-card__text-container' href='###'>
-        <p className='news-card__date'>{props.card.date}</p>
-        <h3 className='news-card__title'>{props.card.title}</h3>
-        <p className='news-card__paragraph'>{props.card.paragraph}</p>
-        <p className='news-card__source'>{props.card.source}</p>
+      <a className='news-card__text-container' href={card.url} target='_blank'>
+        <p className='news-card__date'>
+          {Moment(card.publishedAt).format('MMMM D, YYYY')}
+        </p>
+        <h3 className='news-card__title'>{card.title}</h3>
+        <p className='news-card__paragraph'>{card.description}</p>
+        <p className='news-card__source'>{card.source.name}</p>
       </a>
     </li>
   );

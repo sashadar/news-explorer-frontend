@@ -1,6 +1,18 @@
 import React from 'react';
 
-function SearchForm({ isMenuOpen }) {
+function SearchForm({ isMenuOpen, handleSearchArticles }) {
+  function handleSearchSubmit(e) {
+    e.preventDefault();
+    const keyword = e.currentTarget[0].value;
+
+    if (keyword === '') {
+      e.currentTarget[0].placeholder = 'Please enter a keyword';
+    } else {
+      e.currentTarget[0].placeholder = 'Enter topic';
+      handleSearchArticles(keyword);
+    }
+  }
+
   return (
     <section
       className={`search-form ${isMenuOpen ? 'search-form_shifted-down' : ''}`}
@@ -11,7 +23,7 @@ function SearchForm({ isMenuOpen }) {
           Find the latest news on any topic and save them in your personal
           account.
         </p>
-        <form className='search-form__form'>
+        <form className='search-form__form' onSubmit={handleSearchSubmit}>
           <input
             className='search-form__input'
             placeholder='Enter topic'
