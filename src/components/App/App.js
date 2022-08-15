@@ -12,6 +12,8 @@ import newsApi from '../../utils/NewsApi';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
+import { useFormWithValidation } from '../../utils/customHooks';
+
 import { MOBILESCREENWIDTH } from '../../utils/constants';
 
 function App() {
@@ -19,9 +21,6 @@ function App() {
     name: 'AlexDarincev',
   });
   const [signedIn, setSignedIn] = React.useState(true);
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [userName, setUserName] = React.useState('');
   const [articles, setArticles] = React.useState([]);
   const [keyword, setKeyword] = React.useState('');
   const [isSignInPopupOpen, setIsSignInPopupOpen] = React.useState(false);
@@ -31,10 +30,14 @@ function App() {
   const [isPreloaderActive, setIsPreloaderActive] = React.useState(false);
   const [isNothingFound, setIsNothingFound] = React.useState(false);
   const [isSearchError, setIsSearchError] = React.useState(false);
-  const [isFormValid, setIsFormValid] = React.useState(true);
+  /*  const [isFormValid, setIsFormValid] = React.useState(true); */
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMode, setIsMobileMode] = React.useState(false);
   const [isBlankHeader, setIsBlankHeader] = React.useState(false);
+
+  const [formValues, handleChange, formErrors, isFormValid, resetForm] =
+    useFormWithValidation();
+  const [formSubmitError, setFormSubmitError] = React.useState('');
 
   const history = useHistory();
 
@@ -77,24 +80,24 @@ function App() {
     setIsSignupSuccessPopupOpen(false);
   };
 
-  function resetForm() {
+  /*   function resetForm() {
     setEmail('');
     setPassword('');
     setUserName('');
-  }
+  } */
 
   const openSignUpPopup = () => {
     closeAllPopups();
     setIsMenuOpen(false);
-    setIsSignUpPopupOpen(true);
     resetForm();
+    setIsSignUpPopupOpen(true);
   };
 
   const openSignInPopup = () => {
     closeAllPopups();
     setIsMenuOpen(false);
-    setIsSignInPopupOpen(true);
     resetForm();
+    setIsSignInPopupOpen(true);
   };
 
   const handleLogout = () => {
@@ -179,26 +182,24 @@ function App() {
 
         <Footer />
         <SignIn
+          formValues={formValues}
+          handleChange={handleChange}
+          formErrors={formErrors}
+          formSubmitError={formSubmitError}
           isOpen={isSignInPopupOpen}
           onClose={closeAllPopups}
           handleSignInSubmit={handleSignInSubmit}
-          email={email}
-          setEmail={setEmail}
-          password={password}
-          setPassword={setPassword}
           handleSignUpCLick={openSignUpPopup}
           isFormValid={isFormValid}
         ></SignIn>
         <SignUp
+          formValues={formValues}
+          handleChange={handleChange}
+          formErrors={formErrors}
+          formSubmitError={formSubmitError}
           isOpen={isSignUpPopupOpen}
           onClose={closeAllPopups}
           handleSignUpSubmit={handleSignUpSubmit}
-          email={email}
-          setEmail={setEmail}
-          password={password}
-          setPassword={setPassword}
-          userName={userName}
-          setUserName={setUserName}
           handleSignInCLick={openSignInPopup}
           isFormValid={isFormValid}
         ></SignUp>

@@ -3,14 +3,14 @@ import React from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
 function SignIn({
+  formValues,
+  handleChange,
+  formErrors,
+  formSubmitError,
   isOpen,
   onClose,
-  setEmail,
-  setPassword,
   handleSignUpCLick,
   handleSignInSubmit,
-  email,
-  password,
   isFormValid,
 }) {
   return (
@@ -26,12 +26,12 @@ function SignIn({
           name='email'
           id='email-input'
           placeholder='Enter email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={formValues.email || ''}
+          onChange={handleChange}
           required
         />
         <span className='popup__error' id='email-input-error'>
-          Email error
+          {formErrors.email}
         </span>
         <label className='popup__label' htmlFor='password-input'>
           Password
@@ -42,18 +42,18 @@ function SignIn({
           name='password'
           id='password-input'
           placeholder='Enter password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={formValues.password || ''}
+          onChange={handleChange}
           required
         />
         <span className='popup__error' id='password-input-error'>
-          Password error
+          {formErrors.password}
         </span>
         <span
           className='popup__error popup__error_submit'
           id='popup-submit-error'
         >
-          Popup submit error
+          {formSubmitError}
         </span>
         <button
           type='submit'
