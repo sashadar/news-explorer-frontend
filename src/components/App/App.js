@@ -9,6 +9,7 @@ import SignUp from '../SignUp/SignUp';
 import SignUpSuccess from '../SignUpSuccess/SignUpSuccess';
 
 import newsApi from '../../utils/NewsApi';
+import mainApi from '../../utils/MainApi';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
@@ -90,6 +91,7 @@ function App() {
     closeAllPopups();
     setIsMenuOpen(false);
     resetForm();
+    setFormSubmitError('');
     setIsSignUpPopupOpen(true);
   };
 
@@ -97,6 +99,7 @@ function App() {
     closeAllPopups();
     setIsMenuOpen(false);
     resetForm();
+    setFormSubmitError('');
     setIsSignInPopupOpen(true);
   };
 
@@ -109,7 +112,6 @@ function App() {
   const handleSearchArticles = (keyword) => {
     setIsPreloaderActive(true);
     setKeyword(keyword);
-
     /* console.log(newsApi.getArticles('Tesla').totalResults); */
     /*     newsApi.getArticles(keyword).then(({ articles }) => {
       console.log(JSON.stringify(articles[0]));
@@ -135,15 +137,29 @@ function App() {
 
   const handleSignInSubmit = (e) => {
     e.preventDefault();
-    /* to be continued...*/
+
     setIsSignInPopupOpen(false);
   };
 
   const handleSignUpSubmit = (e) => {
     e.preventDefault();
-    /* to be continued...*/
-    setIsSignUpPopupOpen(false);
-    setIsSignupSuccessPopupOpen(true);
+
+    mainApi
+      .register({
+        email: formValues.email,
+        password: formValues.password,
+        name: formValues.username,
+      })
+      .then((res) => {
+        if (res.message) {
+          console.log(`Error during sign up: ${res.message}`);
+          throw new Error(res.message);
+        } else {
+          setIsSignUpPopupOpen(false);
+          setIsSignupSuccessPopupOpen(true);
+        }
+      })
+      .catch((err) => setFormSubmitError(err.message));
   };
 
   return (
