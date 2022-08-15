@@ -18,10 +18,8 @@ import { useFormWithValidation } from '../../utils/customHooks';
 import { MOBILESCREENWIDTH } from '../../utils/constants';
 
 function App() {
-  const [currentUser, setCurrentUser] = React.useState({
-    name: 'AlexDarincev',
-  });
-  const [signedIn, setSignedIn] = React.useState(true);
+  const [currentUser, setCurrentUser] = React.useState({});
+  const [signedIn, setSignedIn] = React.useState(false);
   const [articles, setArticles] = React.useState([]);
   const [keyword, setKeyword] = React.useState('');
   const [isSignInPopupOpen, setIsSignInPopupOpen] = React.useState(false);
@@ -105,6 +103,8 @@ function App() {
 
   const handleLogout = () => {
     setIsMenuOpen(false);
+    localStorage.removeItem('token');
+    setCurrentUser({});
     setSignedIn(false);
     history.push('/');
   };
@@ -137,8 +137,19 @@ function App() {
 
   const handleSignInSubmit = (e) => {
     e.preventDefault();
-
-    setIsSignInPopupOpen(false);
+    mainApi
+      .authorize({ email: formValues.email, password: formValues.password })
+      .then((res) => {
+        if (res.message) {
+          console.log(`Error during sign up: ${res.message}`);
+          throw new Error(res.message);
+        } else {
+          setIsSignInPopupOpen(false);
+          resetForm();
+          setSignedIn(true);
+        }
+      })
+      .catch((err) => setFormSubmitError(err.message));
   };
 
   const handleSignUpSubmit = (e) => {
@@ -156,11 +167,32 @@ function App() {
           throw new Error(res.message);
         } else {
           setIsSignUpPopupOpen(false);
+          resetForm();
           setIsSignupSuccessPopupOpen(true);
         }
       })
       .catch((err) => setFormSubmitError(err.message));
   };
+
+  const tokenCheck = () => {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      mainApi
+        .checkToken(token)
+        .then((res) => {
+          setCurrentUser(res.data);
+          setSignedIn(true);
+        })
+        .catch((err) => {
+          console.log(`Error:     ${err}`);
+        });
+    }
+  };
+
+  React.useEffect(() => {
+    tokenCheck();
+  }, [signedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
