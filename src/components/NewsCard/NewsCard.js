@@ -1,33 +1,13 @@
 import React from 'react';
 import Moment from 'moment';
 
-import noImage from '../../images/icons/no-image-icon.jpg';
-
 function NewsCard({
   card,
   signedIn,
   page,
   handleSaveArticle,
   handleDeleteArticle,
-  /*  switchRefreshRelay, */
 }) {
-  /*  const [isSaved, setIsSaved] = React.useState(false); */
-
-  // const handleSaveCardClick = () => {
-  //   handleSaveArticle(card, keyword);
-  //   /* setIsSaved(true); */
-  // };
-
-  // const handleRemoveCardClick = () => {
-  //   console.log(`handleRemoveCardClick: card._id: ${card._id}`);
-  //   handleDeleteArticle(card);
-  //   /*     if (page === 'saved news') {
-  //     switchRefreshRelay();
-  //   } */
-
-  //   /* setIsSaved(false); */
-  // };
-
   return (
     <li className='news-card'>
       <img
@@ -78,7 +58,12 @@ function NewsCard({
         ></button>
       )}
 
-      <a className='news-card__text-container' href={card.url} target='_blank'>
+      <a
+        className='news-card__text-container'
+        href={card.url}
+        target='_blank'
+        rel='noreferrer'
+      >
         <p className='news-card__date'>
           {Moment(card.publishedAt).format('MMMM D, YYYY')}
         </p>

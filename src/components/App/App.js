@@ -27,7 +27,6 @@ function App() {
   const [signedIn, setSignedIn] = React.useState(false);
   const [articles, setArticles] = React.useState([]);
   const [savedArticles, setSavedArticles] = React.useState([]);
-  const [keyword, setKeyword] = React.useState('');
   const [isSignInPopupOpen, setIsSignInPopupOpen] = React.useState(false);
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = React.useState(false);
   const [isSignupSuccessPopupOpen, setIsSignupSuccessPopupOpen] =
@@ -36,7 +35,6 @@ function App() {
   const [isPreloaderActive, setIsPreloaderActive] = React.useState(false);
   const [isNothingFound, setIsNothingFound] = React.useState(false);
   const [isSearchError, setIsSearchError] = React.useState(false);
-  /*  const [isFormValid, setIsFormValid] = React.useState(true); */
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMode, setIsMobileMode] = React.useState(false);
   const [isBlankHeader, setIsBlankHeader] = React.useState(false);
@@ -52,10 +50,11 @@ function App() {
     return innerWidth;
   };
 
-  /*   const switchRefreshRelay = () => {
-    const tempVar = !componentRefreshRelay;
-    setComponentRefreshRelay(tempVar);
-  }; */
+  React.useEffect(() => {
+    if (localStorage.getItem('articles')) {
+      setArticles(JSON.parse(localStorage.getItem('articles')));
+    }
+  }, []);
 
   React.useEffect(() => {
     const handleWindowResize = () => {
@@ -66,7 +65,6 @@ function App() {
         setIsMobileMode(false);
         setIsMenuOpen(false);
       }
-      /* console.log(`windowWidth: ${windowWidth} isMobileMode: ${isMobileMode}`); */
     };
 
     handleWindowResize();
@@ -107,6 +105,8 @@ function App() {
   const handleLogout = () => {
     setIsMenuOpen(false);
     localStorage.removeItem('token');
+    localStorage.removeItem('articles');
+    setArticles({});
     setCurrentUser({});
     setSignedIn(false);
     setSavedArticles({});
@@ -115,7 +115,6 @@ function App() {
 
   const handleSearchArticles = (keyword) => {
     setIsPreloaderActive(true);
-    setKeyword(keyword);
     newsApi
       .getArticles(keyword)
       .then((data) => {
@@ -137,7 +136,6 @@ function App() {
       .catch(() => {
         setIsSearchError(true);
         setArticles([]);
-        localStorage.removeItem('articles');
       })
       .finally(() => {
         setIsPreloaderActive(false);
@@ -170,7 +168,6 @@ function App() {
           setIsSignInPopupOpen(false);
           resetForm();
           setSignedIn(true);
-          getSavedArticles();
         }
       })
       .catch((err) => setFormSubmitError(err.message));
@@ -227,13 +224,14 @@ function App() {
         .saveArticle({ token, article })
         .then((res) => {
           if (!res.message) {
-            console.log(`handlesaveArticle. res: ${JSON.stringify(res)}`);
             res.isSaved = true;
             const updatedArticles = articles.map((element) =>
               element === article ? res : element
             );
             setArticles(updatedArticles);
+            localStorage.setItem('articles', JSON.stringify(updatedArticles));
             const updatedSavedArticles = [...savedArticles, res];
+
             setSavedArticles(updatedSavedArticles);
           }
         })
@@ -253,12 +251,10 @@ function App() {
           const updatedArticles = articles.map((element) =>
             element._id === article._id ? article : element
           );
-          console.log(
-            `handleDeleteArticle. got successful delete response article.isSaved: ${article.isSaved}`
-          );
           setArticles(updatedArticles);
+          localStorage.setItem('articles', JSON.stringify(updatedArticles));
           const updatedSavedArticles = savedArticles.filter(
-            (element) => element._id != article._id
+            (element) => element._id !== article._id
           );
           setSavedArticles(updatedSavedArticles);
         }
@@ -303,8 +299,6 @@ function App() {
             handleLogoutClick={handleLogout}
             handleDeleteArticle={handleDeleteArticle}
             savedArticles={savedArticles}
-            /* componentRefreshRelay={componentRefreshRelay} */
-            /* getSavedArticles={getSavedArticles} */
           />
         </Switch>
 
