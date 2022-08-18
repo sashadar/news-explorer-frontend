@@ -73,6 +73,7 @@ class MainApi {
             url: article.link,
             urlToImage: article.image,
             _id: article._id,
+            owner: article.owner,
           };
         });
       });
