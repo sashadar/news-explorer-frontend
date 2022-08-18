@@ -3,30 +3,45 @@ import Moment from 'moment';
 
 import noImage from '../../images/icons/no-image-icon.jpg';
 
-function NewsCard({ card, keyword, signedIn, page, key }) {
-  const [isSaved, setIsSaved] = React.useState(false);
+function NewsCard({
+  card,
+  signedIn,
+  page,
+  handleSaveArticle,
+  handleDeleteArticle,
+  /*  switchRefreshRelay, */
+}) {
+  /*  const [isSaved, setIsSaved] = React.useState(false); */
 
-  const saveCard = () => {
-    setIsSaved(true);
-  };
+  // const handleSaveCardClick = () => {
+  //   handleSaveArticle(card, keyword);
+  //   /* setIsSaved(true); */
+  // };
 
-  const removeCard = () => {
-    setIsSaved(false);
-  };
+  // const handleRemoveCardClick = () => {
+  //   console.log(`handleRemoveCardClick: card._id: ${card._id}`);
+  //   handleDeleteArticle(card);
+  //   /*     if (page === 'saved news') {
+  //     switchRefreshRelay();
+  //   } */
+
+  //   /* setIsSaved(false); */
+  // };
 
   return (
     <li className='news-card'>
       <img
         className='news-card__image'
-        src={card.urlToImage ? card.urlToImage : noImage}
-        alt={card.urlToImage ? card.title : 'no image available'}
+        src={card.urlToImage}
+        alt={card.title}
       ></img>
 
       {page === 'saved news' && signedIn && (
         <>
-          <p className='news-card__category'>{keyword}</p>
+          <p className='news-card__category'>{card.keyword}</p>
           <button
             className='news-card__button news-card__button_type_delete'
+            onClick={() => handleDeleteArticle(card)}
             type='button'
           >
             <p className='news-card__tooltip news-card__tooltip_type_delete'>
@@ -47,18 +62,18 @@ function NewsCard({ card, keyword, signedIn, page, key }) {
         </button>
       )}
 
-      {page === 'main' && signedIn && isSaved && (
+      {page === 'main' && signedIn && card.isSaved && (
         <button
           className='news-card__button news-card__button_type_bookmark-marked'
-          onClick={removeCard}
+          onClick={() => handleDeleteArticle(card)}
           type='button'
         ></button>
       )}
 
-      {page === 'main' && signedIn && !isSaved && (
+      {page === 'main' && signedIn && !card.isSaved && (
         <button
           className='news-card__button news-card__button_type_bookmark'
-          onClick={saveCard}
+          onClick={() => handleSaveArticle(card)}
           type='button'
         ></button>
       )}

@@ -7,6 +7,7 @@ import Footer from '../Footer/Footer';
 import SignIn from '../SignIn/SignIn';
 import SignUp from '../SignUp/SignUp';
 import SignUpSuccess from '../SignUpSuccess/SignUpSuccess';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import newsApi from '../../utils/NewsApi';
 import mainApi from '../../utils/MainApi';
@@ -14,18 +15,24 @@ import mainApi from '../../utils/MainApi';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 import { useFormWithValidation } from '../../utils/customHooks';
+import { setIsSaved } from '../../utils/auxiliary';
 
-import { MOBILESCREENWIDTH } from '../../utils/constants';
+import {
+  MOBILESCREENWIDTH,
+  NO_IMAGE_AVAILABLE_URL,
+} from '../../utils/constants';
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [signedIn, setSignedIn] = React.useState(false);
   const [articles, setArticles] = React.useState([]);
+  const [savedArticles, setSavedArticles] = React.useState([]);
   const [keyword, setKeyword] = React.useState('');
   const [isSignInPopupOpen, setIsSignInPopupOpen] = React.useState(false);
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = React.useState(false);
   const [isSignupSuccessPopupOpen, setIsSignupSuccessPopupOpen] =
     React.useState(false);
+
   const [isPreloaderActive, setIsPreloaderActive] = React.useState(false);
   const [isNothingFound, setIsNothingFound] = React.useState(false);
   const [isSearchError, setIsSearchError] = React.useState(false);
@@ -45,6 +52,11 @@ function App() {
     return innerWidth;
   };
 
+  /*   const switchRefreshRelay = () => {
+    const tempVar = !componentRefreshRelay;
+    setComponentRefreshRelay(tempVar);
+  }; */
+
   React.useEffect(() => {
     const handleWindowResize = () => {
       const windowWidth = getWindowWidth();
@@ -54,7 +66,7 @@ function App() {
         setIsMobileMode(false);
         setIsMenuOpen(false);
       }
-      console.log(`windowWidth: ${windowWidth} isMobileMode: ${isMobileMode}`);
+      /* console.log(`windowWidth: ${windowWidth} isMobileMode: ${isMobileMode}`); */
     };
 
     handleWindowResize();
@@ -77,27 +89,18 @@ function App() {
     setIsSignInPopupOpen(false);
     setIsSignUpPopupOpen(false);
     setIsSignupSuccessPopupOpen(false);
-  };
-
-  /*   function resetForm() {
-    setEmail('');
-    setPassword('');
-    setUserName('');
-  } */
-
-  const openSignUpPopup = () => {
-    closeAllPopups();
     setIsMenuOpen(false);
     resetForm();
     setFormSubmitError('');
+  };
+
+  const openSignUpPopup = () => {
+    closeAllPopups();
     setIsSignUpPopupOpen(true);
   };
 
   const openSignInPopup = () => {
     closeAllPopups();
-    setIsMenuOpen(false);
-    resetForm();
-    setFormSubmitError('');
     setIsSignInPopupOpen(true);
   };
 
@@ -106,32 +109,52 @@ function App() {
     localStorage.removeItem('token');
     setCurrentUser({});
     setSignedIn(false);
+    setSavedArticles({});
     history.push('/');
   };
 
   const handleSearchArticles = (keyword) => {
     setIsPreloaderActive(true);
     setKeyword(keyword);
-    /* console.log(newsApi.getArticles('Tesla').totalResults); */
-    /*     newsApi.getArticles(keyword).then(({ articles }) => {
-      console.log(JSON.stringify(articles[0]));
-    }); */
     newsApi
       .getArticles(keyword)
       .then((data) => {
         setIsNothingFound(data.articles.length === 0);
+        data.articles.forEach((articleElement) => {
+          if (!articleElement.urlToImage || articleElement.urlToImage === '') {
+            articleElement.urlToImage = NO_IMAGE_AVAILABLE_URL;
+          }
+
+          const keywordEdited = keyword[0].toUpperCase() + keyword.slice(1);
+          articleElement.keyword = keywordEdited;
+          if (signedIn) {
+            articleElement.isSaved = setIsSaved(articleElement, savedArticles);
+          }
+        });
         setArticles(data.articles);
         localStorage.setItem('articles', JSON.stringify(data.articles));
-        localStorage.setItem('keyword', keyword);
       })
       .catch(() => {
         setIsSearchError(true);
         setArticles([]);
         localStorage.removeItem('articles');
-        localStorage.removeItem('keyword');
       })
       .finally(() => {
         setIsPreloaderActive(false);
+      });
+  };
+
+  const getSavedArticles = () => {
+    const token = localStorage.getItem('token');
+    setSavedArticles({});
+    mainApi
+      .getArticles(token)
+      .then((articles) => {
+        localStorage.setItem('savedArticles', JSON.stringify(articles));
+        setSavedArticles(articles);
+      })
+      .catch((err) => {
+        console.log(`Error:     ${err}`);
       });
   };
 
@@ -147,6 +170,7 @@ function App() {
           setIsSignInPopupOpen(false);
           resetForm();
           setSignedIn(true);
+          getSavedArticles();
         }
       })
       .catch((err) => setFormSubmitError(err.message));
@@ -183,6 +207,7 @@ function App() {
         .then((res) => {
           setCurrentUser(res.data);
           setSignedIn(true);
+          getSavedArticles();
         })
         .catch((err) => {
           console.log(`Error:     ${err}`);
@@ -194,6 +219,55 @@ function App() {
     tokenCheck();
   }, [signedIn]);
 
+  const handleSaveArticle = (article) => {
+    if (!article.isSaved) {
+      const token = localStorage.getItem('token');
+
+      mainApi
+        .saveArticle({ token, article })
+        .then((res) => {
+          if (!res.message) {
+            console.log(`handlesaveArticle. res: ${JSON.stringify(res)}`);
+            res.isSaved = true;
+            const updatedArticles = articles.map((element) =>
+              element === article ? res : element
+            );
+            setArticles(updatedArticles);
+            const updatedSavedArticles = [...savedArticles, res];
+            setSavedArticles(updatedSavedArticles);
+          }
+        })
+        .catch((err) => {
+          console.log(`Error:     ${err}`);
+        });
+    }
+  };
+
+  const handleDeleteArticle = (article) => {
+    const token = localStorage.getItem('token');
+    mainApi
+      .deleteArticle({ token, articleId: article._id })
+      .then((res) => {
+        if (res.data) {
+          article.isSaved = false;
+          const updatedArticles = articles.map((element) =>
+            element._id === article._id ? article : element
+          );
+          console.log(
+            `handleDeleteArticle. got successful delete response article.isSaved: ${article.isSaved}`
+          );
+          setArticles(updatedArticles);
+          const updatedSavedArticles = savedArticles.filter(
+            (element) => element._id != article._id
+          );
+          setSavedArticles(updatedSavedArticles);
+        }
+      })
+      .catch((err) => {
+        console.log(`Error:     ${err}`);
+      });
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='app'>
@@ -201,7 +275,8 @@ function App() {
           <Route exact path='/'>
             <Main
               articles={articles}
-              keyword={keyword}
+              handleSaveArticle={handleSaveArticle}
+              handleDeleteArticle={handleDeleteArticle}
               signedIn={signedIn}
               openSignInPopup={openSignInPopup}
               isMenuOpen={isMenuOpen}
@@ -215,17 +290,22 @@ function App() {
               handleSearchArticles={handleSearchArticles}
             />
           </Route>
-          <Route exact path='/saved-news'>
-            <SavedNews
-              signedIn={signedIn}
-              currentUser={currentUser}
-              isMenuOpen={isMenuOpen}
-              setIsMenuOpen={setIsMenuOpen}
-              isMobileMode={isMobileMode}
-              isBlankHeader={isBlankHeader}
-              handleLogoutClick={handleLogout}
-            ></SavedNews>
-          </Route>
+          <ProtectedRoute
+            exact
+            path='/saved-news'
+            component={SavedNews}
+            signedIn={signedIn}
+            currentUser={currentUser}
+            isMenuOpen={isMenuOpen}
+            setIsMenuOpen={setIsMenuOpen}
+            isMobileMode={isMobileMode}
+            isBlankHeader={isBlankHeader}
+            handleLogoutClick={handleLogout}
+            handleDeleteArticle={handleDeleteArticle}
+            savedArticles={savedArticles}
+            /* componentRefreshRelay={componentRefreshRelay} */
+            /* getSavedArticles={getSavedArticles} */
+          />
         </Switch>
 
         <Footer />

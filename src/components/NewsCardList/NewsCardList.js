@@ -2,7 +2,16 @@ import React from 'react';
 
 import NewsCard from '../NewsCard/NewsCard';
 
-function NewsCardList({ page, signedIn, articles, keyword }) {
+function NewsCardList({
+  page,
+  signedIn,
+  articles,
+  keyword,
+  handleSaveArticle,
+  handleDeleteArticle,
+  /* switchRefreshRelay, */
+  /* savedArticlesRefresh, */
+}) {
   const [cardsCountToShow, setCardsCountToShow] = React.useState(3);
 
   const setMoreCardsToShow = () => {
@@ -15,6 +24,10 @@ function NewsCardList({ page, signedIn, articles, keyword }) {
     }
   }, []);
 
+  /*   React.useEffect(() => {
+    window.location.reload(false);
+  }, [articles]); */
+
   return (
     <section className='news-card-list'>
       {page === 'main' && (
@@ -23,17 +36,19 @@ function NewsCardList({ page, signedIn, articles, keyword }) {
 
       <ul className='news-card-list__list'>
         {articles &&
-          articles
-            .slice(0, cardsCountToShow)
-            .map((currentArticle, i) => (
-              <NewsCard
-                card={currentArticle}
-                keyword={keyword}
-                signedIn={signedIn}
-                page={page}
-                key={i}
-              ></NewsCard>
-            ))}
+          articles.slice(0, cardsCountToShow).map((currentArticle, i) => (
+            <NewsCard
+              handleDeleteArticle={handleDeleteArticle}
+              /* savedArticlesRefresh={savedArticlesRefresh} */
+              /* switchRefreshRelay={switchRefreshRelay} */
+              handleSaveArticle={handleSaveArticle}
+              card={currentArticle}
+              keyword={keyword}
+              signedIn={signedIn}
+              page={page}
+              key={i}
+            ></NewsCard>
+          ))}
       </ul>
 
       {articles && cardsCountToShow < articles.length && (

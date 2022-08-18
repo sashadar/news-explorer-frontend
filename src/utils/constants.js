@@ -81,3 +81,7 @@ export const NOTHING_FOUND_MESSAGE = {
   title: 'Nothing Found',
   message: 'Sorry, but nothing matched your search terms.',
 };
+
+export const NO_IMAGE_AVAILABLE_URL =
+  'https://www.freeiconspng.com/uploads/no-image-icon-8.png';
+/* 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'; */

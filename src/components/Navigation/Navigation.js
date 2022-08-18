@@ -62,11 +62,13 @@ function Navigation({
     ) {
       setToDark();
     }
-    console.log(isMobileMode);
+    /*     console.log(isMobileMode); */
   }, [isMobileMode]);
 
   const handleLinkClick = () => {
-    setIsMenuOpen(false);
+    if (section === 'header') {
+      setIsMenuOpen(false);
+    }
   };
 
   return (

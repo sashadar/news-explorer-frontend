@@ -7,11 +7,10 @@ import Preloader from '../Preloader/Preloader';
 import NothingFound from '../NothingFound/NothingFound';
 import NewsCardList from '../NewsCardList/NewsCardList';
 
-import { tempCards } from '../../utils/constants';
-
 function Main({
   articles,
-  keyword,
+  handleSaveArticle,
+  handleDeleteArticle,
   signedIn,
   openSignInPopup,
   isMenuOpen,
@@ -47,11 +46,12 @@ function Main({
         <NothingFound isSearchError={isSearchError}></NothingFound>
       )}
 
-      {articles.length > 0 && (
+      {articles.length > 0 && !isPreloaderActive && (
         <NewsCardList
           page='main'
           articles={articles}
-          keyword={keyword}
+          handleSaveArticle={handleSaveArticle}
+          handleDeleteArticle={handleDeleteArticle}
           signedIn={signedIn}
         />
       )}
