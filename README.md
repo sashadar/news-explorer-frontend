@@ -14,10 +14,9 @@
 
 **This repo is for the frontend part of the project.**
 
-- URL: [https://www.alexdar.news.students.nomoredomainssbs.ru/][page_url]
-- Server IP: 35.192.69.217
+**URL:** [https://www.alexdar.news.students.nomoredomainssbs.ru/][page_url]
 
-[**Link to the backend repo** ][news_explorer_backend]
+[Link to the backend repo][news_explorer_backend]
 
 ## **Technologies**
 
