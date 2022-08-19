@@ -14,7 +14,7 @@
 
 **This repo is for the frontend part of the project.**
 
-- URL: [https://www.alexdar.news.students.nomoredomainssbs.ru/articles][page_url]
+- URL: [https://www.alexdar.news.students.nomoredomainssbs.ru/][page_url]
 - Server IP: 35.192.69.217
 
 [**Link to the backend repo** ][news_explorer_backend]
@@ -55,7 +55,7 @@ In the project directory, you can run:
 
 ### `npm run build` Builds the app for production to the `build` folder.
 
-[page_url]: https://www.alexdar.news.students.nomoredomainssbs.ru/articles
+[page_url]: https://www.alexdar.news.students.nomoredomainssbs.ru/
 [news_api]: https://newsapi.org/
 [news_explorer_backend]: https://github.com/sashadar/news-explorer-api
 [figma]: https://www.figma.com/file/z1bxDn7eBEDlsDhnZ9dtin/Your-Final-Project?node-id=0%3A1
