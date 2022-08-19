@@ -14,6 +14,9 @@
 
 **This repo is for the frontend part of the project.**
 
+- URL: [https://www.alexdar.news.students.nomoredomainssbs.ru/articles][page_url]
+- Server IP: 35.192.69.217
+
 [**Link to the backend repo** ][news_explorer_backend]
 
 ## **Technologies**
@@ -30,6 +33,8 @@
 
 ## **Additional Info**
 
+-
+
 - Due to restrictions with basic developer subscription to News API service new articles are available with 1 hour delay and you can search articles up to a month old.
 - The project design was provided using a Figma tool. [Link to the project on Figma][figma].
 - Local image/ico files are compressed to use in Web.
@@ -42,10 +47,6 @@
 - Enable self-adjustable news cards display settings.
 - Add delete your own profile option
 
-[news_api]: https://newsapi.org/
-[news_explorer_backend]: https://github.com/sashadar/news-explorer-api
-[figma]: https://www.figma.com/file/z1bxDn7eBEDlsDhnZ9dtin/Your-Final-Project?node-id=0%3A1
-
 ## Available Scripts
 
 In the project directory, you can run:
@@ -53,3 +54,8 @@ In the project directory, you can run:
 ### `npm start` Runs the app in the development mode.
 
 ### `npm run build` Builds the app for production to the `build` folder.
+
+[page_url]: https://www.alexdar.news.students.nomoredomainssbs.ru/articles
+[news_api]: https://newsapi.org/
+[news_explorer_backend]: https://github.com/sashadar/news-explorer-api
+[figma]: https://www.figma.com/file/z1bxDn7eBEDlsDhnZ9dtin/Your-Final-Project?node-id=0%3A1
