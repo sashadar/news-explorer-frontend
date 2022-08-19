@@ -19,7 +19,7 @@ class MainApi {
         email: email,
         name: name,
       }),
-    }).then((res) => res.json());
+    }).then(processResponse);
   };
 
   authorize = ({ email, password }) => {
@@ -34,7 +34,7 @@ class MainApi {
         password,
       }),
     })
-      .then((res) => res.json())
+      .then(processResponse)
       .then((data) => {
         localStorage.setItem('token', data.token);
         return data;
