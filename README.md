@@ -44,7 +44,7 @@
 - Enable dark mode.
 - Adding search customization (language, country, popularity).
 - Enable self-adjustable news cards display settings.
-- Add delete your own profile option
+- Add delete your own profile option.
 
 ## Available Scripts
 

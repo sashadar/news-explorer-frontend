@@ -1,17 +1,24 @@
 import React from 'react';
 
 function SearchForm({ isMenuOpen, handleSearchArticles }) {
-  function handleSearchSubmit(e) {
-    e.preventDefault();
-    const keyword = e.currentTarget[0].value;
+  const [inputValue, setInputValue] = React.useState('');
+  const [inputPlaceholderValue, setInputPlaceholderValue] =
+    React.useState('Enter topic');
 
-    if (keyword === '') {
-      e.currentTarget[0].placeholder = 'Please enter a keyword';
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+
+    if (inputValue === '') {
+      setInputPlaceholderValue('Please enter a keyword');
     } else {
-      e.currentTarget[0].placeholder = 'Enter topic';
-      handleSearchArticles(keyword);
+      setInputPlaceholderValue('Enter topic');
+      handleSearchArticles(inputValue);
     }
-  }
+  };
 
   return (
     <section
@@ -26,7 +33,9 @@ function SearchForm({ isMenuOpen, handleSearchArticles }) {
         <form className='search-form__form' onSubmit={handleSearchSubmit}>
           <input
             className='search-form__input'
-            placeholder='Enter topic'
+            placeholder={inputPlaceholderValue}
+            value={inputValue}
+            onChange={handleChange}
           ></input>
           <button className='search-form__button'>Search</button>
         </form>
