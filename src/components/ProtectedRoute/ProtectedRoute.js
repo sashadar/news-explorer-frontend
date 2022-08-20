@@ -3,17 +3,17 @@ import { Route, Redirect } from 'react-router-dom';
 
 const ProtectedRoute = ({
   component: Component,
-  signedIn,
+
   openSignInPopup,
   ...props
 }) => {
-  if (!signedIn) {
+  if (!props.signedIn) {
     openSignInPopup();
   }
 
   return (
     <Route>
-      {() => (signedIn ? <Component {...props} /> : <Redirect to='/' />)}
+      {() => (props.signedIn ? <Component {...props} /> : <Redirect to='/' />)}
     </Route>
   );
 };

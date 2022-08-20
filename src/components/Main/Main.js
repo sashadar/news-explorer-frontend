@@ -13,6 +13,7 @@ function Main({
   handleDeleteArticle,
   signedIn,
   openSignInPopup,
+  openSignUpPopup,
   isMenuOpen,
   setIsMenuOpen,
   isMobileMode,
@@ -53,6 +54,7 @@ function Main({
           handleSaveArticle={handleSaveArticle}
           handleDeleteArticle={handleDeleteArticle}
           signedIn={signedIn}
+          openSignUpPopup={openSignUpPopup}
         />
       )}
       <About />

@@ -7,7 +7,16 @@ function NewsCard({
   page,
   handleSaveArticle,
   handleDeleteArticle,
+  openSignUpPopup,
 }) {
+  const handleDeleteArticleClick = () => {
+    handleDeleteArticle(card);
+  };
+
+  const handleSaveArticleClick = () => {
+    handleSaveArticle(card);
+  };
+
   return (
     <li className='news-card'>
       <img
@@ -21,7 +30,7 @@ function NewsCard({
           <p className='news-card__category'>{card.keyword}</p>
           <button
             className='news-card__button news-card__button_type_delete'
-            onClick={() => handleDeleteArticle(card)}
+            onClick={handleDeleteArticleClick}
             type='button'
           >
             <p className='news-card__tooltip news-card__tooltip_type_delete'>
@@ -35,6 +44,7 @@ function NewsCard({
         <button
           className='news-card__button news-card__button_type_bookmark'
           type='button'
+          onClick={openSignUpPopup}
         >
           <p className='news-card__tooltip news-card__tooltip_type_bookmark'>
             Sign in to save articles
@@ -45,7 +55,7 @@ function NewsCard({
       {page === 'main' && signedIn && card.isSaved && (
         <button
           className='news-card__button news-card__button_type_bookmark-marked'
-          onClick={() => handleDeleteArticle(card)}
+          onClick={handleDeleteArticleClick}
           type='button'
         ></button>
       )}
@@ -53,7 +63,7 @@ function NewsCard({
       {page === 'main' && signedIn && !card.isSaved && (
         <button
           className='news-card__button news-card__button_type_bookmark'
-          onClick={() => handleSaveArticle(card)}
+          onClick={handleSaveArticleClick}
           type='button'
         ></button>
       )}

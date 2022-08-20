@@ -275,6 +275,7 @@ function App() {
               handleDeleteArticle={handleDeleteArticle}
               signedIn={signedIn}
               openSignInPopup={openSignInPopup}
+              openSignUpPopup={openSignUpPopup}
               isMenuOpen={isMenuOpen}
               setIsMenuOpen={setIsMenuOpen}
               isMobileMode={isMobileMode}

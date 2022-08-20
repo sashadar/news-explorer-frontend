@@ -9,6 +9,7 @@ function NewsCardList({
   keyword,
   handleSaveArticle,
   handleDeleteArticle,
+  openSignUpPopup,
 }) {
   const [cardsCountToShow, setCardsCountToShow] = React.useState(3);
 
@@ -34,6 +35,7 @@ function NewsCardList({
             .slice(0, cardsCountToShow)
             .map((currentArticle, i) => (
               <NewsCard
+                openSignUpPopup={openSignUpPopup}
                 handleDeleteArticle={handleDeleteArticle}
                 handleSaveArticle={handleSaveArticle}
                 card={currentArticle}
