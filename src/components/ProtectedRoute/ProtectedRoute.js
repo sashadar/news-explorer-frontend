@@ -1,10 +1,19 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-const ProtectedRoute = ({ component: Component, ...props }) => {
+const ProtectedRoute = ({
+  component: Component,
+  signedIn,
+  openSignInPopup,
+  ...props
+}) => {
+  if (!signedIn) {
+    openSignInPopup();
+  }
+
   return (
     <Route>
-      {() => (props.signedIn ? <Component {...props} /> : <Redirect to='/' />)}
+      {() => (signedIn ? <Component {...props} /> : <Redirect to='/' />)}
     </Route>
   );
 };

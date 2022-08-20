@@ -299,6 +299,7 @@ function App() {
             handleLogoutClick={handleLogout}
             handleDeleteArticle={handleDeleteArticle}
             savedArticles={savedArticles}
+            openSignInPopup={openSignInPopup}
           />
         </Switch>
 
