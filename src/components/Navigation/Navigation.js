@@ -62,11 +62,12 @@ function Navigation({
     ) {
       setToDark();
     }
-    console.log(isMobileMode);
   }, [isMobileMode]);
 
   const handleLinkClick = () => {
-    setIsMenuOpen(false);
+    if (section === 'header') {
+      setIsMenuOpen(false);
+    }
   };
 
   return (
@@ -146,6 +147,7 @@ function Navigation({
               className='navigation__link navigation__link_dark navigation__link_footer'
               href='https://practicum.com/'
               target='_blank'
+              rel='noreferrer'
             >
               Practicum by Yandex
             </a>
@@ -159,14 +161,20 @@ function Navigation({
               className='navigation__icon-link navigation__icon-link_icon_github'
               href='https://github.com/Yandex-Practicum'
               target='_blank'
-            ></a>
+              rel='noreferrer'
+            >
+              {''}
+            </a>
           </li>
           <li className='navigation__list-item'>
             <a
               className='navigation__icon-link navigation__icon-link_icon_facebook'
               href='https://www.facebook.com/Practicum100IL/'
               target='_blank'
-            ></a>
+              rel='noreferrer'
+            >
+              {''}
+            </a>
           </li>
         </ul>
       )}

@@ -100,7 +100,7 @@
   font-family: 'Inter', 'Arial', sans-serif;
   font-size: 12px;
   line-height: 15px;
-  height: 14px;
+  min-height: 14px;
   color: #ff0000;
 }
 
